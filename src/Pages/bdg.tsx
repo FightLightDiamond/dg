@@ -5,9 +5,7 @@ import {
     Card,
     CardHeader,
     CardBody,
-    CardFooter,
-    Typography,
-    Tooltip,
+    Typography, Button, CardFooter,
 } from "@material-tailwind/react";
 
 const initialData: any = {
@@ -17,15 +15,32 @@ const initialData: any = {
         'task-3': {id: 'task-3', content: 'abc3'},
         'task-4': {id: 'task-4', content: 'abc4'},
         'task-5': {id: 'task-5', content: 'abc5'},
+        'task-6': {id: 'task-6', content: 'abc6'},
+        'task-7': {id: 'task-6', content: 'abc7'},
+        'task-8': {id: 'task-6', content: 'abc8'},
     },
     columns: {
         'column-1': {
             id: 'column-1',
             title: 'to do',
-            taskIds: ['task-1', 'task-2']
+            taskIds: [
+                'task-1',
+                'task-2',
+                'task-3',
+                'task-4',
+                'task-5',
+                'task-6',
+                'task-7',
+                'task-8',
+            ]
+        },
+        'column-2': {
+            id: 'column-2',
+            title: 'Remove',
+            taskIds: []
         }
     },
-    columnOrder: ['column-1']
+    columnOrder: ['column-1', 'column-2']
 }
 export default function Bdg() {
     const [tasks] = useState(initialData.tasks)
@@ -82,51 +97,33 @@ export default function Bdg() {
         })
     }
 
-    const TABLE_ROWS = [
-        {
-            name: "John Michael",
-            job: "Manager",
-            date: "23/04/18",
-        },
-        {
-            name: "Alexa Liras",
-            job: "Developer",
-            date: "23/04/18",
-        },
-        {
-            name: "Laurent Perrier",
-            job: "Executive",
-            date: "19/09/17",
-        },
-        {
-            name: "Michael Levi",
-            job: "Developer",
-            date: "24/12/08",
-        },
-        {
-            name: "Richard Gran",
-            job: "Manager",
-            date: "04/10/21",
-        },
-    ];
 
     return <>
         <div className="container mx-auto pt-4">
             <div className="flex justify-center gap-4 mb-4">
                 {
                     [1, 2, 3, ].map((item) =>
-                        <Card className="w-56">
+                        <Card className="max-w-xs">
                             <CardHeader floated={false} className="h-auto">
                                 <img src="/img/heroes/Sphinx.png" alt="profile-picture" />
                             </CardHeader>
                             <CardBody className="text-center">
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    SPINX
-                                </Typography>
+                                {/*<Typography variant="h4" color="blue-gray" className="mb-2">*/}
+                                {/*    SPINX*/}
+                                {/*</Typography>*/}
                                 <Typography color="blue" className="font-medium" textGradient>
                                     +10% ATK
                                 </Typography>
                             </CardBody>
+                            {/*<CardFooter className="pt-0">*/}
+                            {/*    /!*<Button*!/*/}
+                            {/*    /!*    ripple={false}*!/*/}
+                            {/*    /!*    fullWidth={true}*!/*/}
+                            {/*    /!*    className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"*!/*/}
+                            {/*    /!*>*!/*/}
+                            {/*    /!*    Add to Cart*!/*/}
+                            {/*    /!*</Button>*!/*/}
+                            {/*</CardFooter>*/}
                         </Card>
                     )
                 }
@@ -150,61 +147,6 @@ export default function Bdg() {
                 </DragDropContext>
             </div>
 
-            <Card className="overflow-scroll h-full w-full">
-                <table className="w-full min-w-max table-auto text-left">
-                    <tbody>
-                    {TABLE_ROWS.map(({ name, job, date }, index) => {
-                        const isLast = index === TABLE_ROWS.length - 1;
-                        const classes = isLast ? "p-4" : "mx-auto p-4 border-b border-blue-gray-50";
-
-                        return (
-                            <tr key={name}>
-                                <td className={classes} >
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                    {/*<img className={'w-full'} src="/img/heroes/Sphinx.png" alt="profile-picture" />*/}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {job}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {date}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography as="a" href="#" variant="small" color="blue" className="font-medium">
-                                        Edit
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {name}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {job}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {date}
-                                    </Typography>
-                                </td>
-                                <td className={classes}>
-                                    <Typography as="a" href="#" variant="small" color="blue" className="font-medium">
-                                        Edit
-                                    </Typography>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
-            </Card>
         </div>
     </>
 }

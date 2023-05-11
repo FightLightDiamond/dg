@@ -1,23 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 import Task from './Task';
 import {Droppable} from "react-beautiful-dnd";
-import {Card, CardBody, List, Typography} from "@material-tailwind/react";
+import {Card, CardBody, Typography} from "@material-tailwind/react";
 
 
 const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], isDropDisabled?: boolean, index?: number}) => {
     return (
-        <Card className="mx-auto">
+        <Card className="mx-auto mb-4">
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                     {column.title}
                 </Typography>
                 <Droppable
                     droppableId={column.id}
-                    // direction="horizontal"
+                    direction="horizontal"
                 >
                     {(provided, snapshot) => (
-                        <List
+                        <div className={'flex flex-row justify-between'}
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                             data-draggingover={snapshot.isDraggingOver}
@@ -29,7 +28,7 @@ const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], is
                                 )
                             }
                             {provided.placeholder}
-                        </List>
+                        </div>
                     )}
                 </Droppable>
             </CardBody>

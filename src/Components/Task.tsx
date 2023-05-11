@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
-import {Chip, ListItem, ListItemPrefix} from "@material-tailwind/react";
+import {Avatar, Badge, Chip, ListItem, ListItemPrefix, Rating} from "@material-tailwind/react";
 
 const Task = ({task, index}: any) => {
     return <>
@@ -9,20 +8,23 @@ const Task = ({task, index}: any) => {
             index={index}
         >
             {(provided, snapshot) => (
-                <ListItem
-                    className='border'
+                <div
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                     data-dragging={snapshot.isDragging}
                 >
                     <ListItemPrefix {...provided.dragHandleProps}>
-                       <Chip value="chip" />
+                        <Badge content="1" withBorder>
+                            <Avatar
+                                size="xxl"
+                                variant="rounded"
+                                src="/img/avatar/sprinx.png"
+                                alt="profile picture"
+                            />
+                        </Badge>
                     </ListItemPrefix>
-                    <div>
-                        {task.content }
-                    </div>
-                </ListItem>
+                </div>
             )}
         </Draggable>
     </>
