@@ -14,13 +14,14 @@ const Task = ({task, index}: any) => {
                     ref={provided.innerRef}
                     data-dragging={snapshot.isDragging}
                 >
-                    <ListItemPrefix {...provided.dragHandleProps}>
-                        <Badge content="1" withBorder>
+                    <ListItemPrefix {...provided.dragHandleProps} >
+                        <Badge content="1" withBorder  >
                             <Avatar
                                 size="xxl"
                                 variant="rounded"
                                 src="/img/avatar/sprinx.png"
                                 alt="profile picture"
+                                className='shadow-lg hover:shadow-pink-500/100'
                             />
                         </Badge>
                     </ListItemPrefix>

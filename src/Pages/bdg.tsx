@@ -5,7 +5,7 @@ import {
     Card,
     CardHeader,
     CardBody,
-    Typography, Button, CardFooter,
+    Typography, Button, CardFooter, Avatar,
 } from "@material-tailwind/react";
 
 const initialData: any = {
@@ -16,8 +16,8 @@ const initialData: any = {
         'task-4': {id: 'task-4', content: 'abc4'},
         'task-5': {id: 'task-5', content: 'abc5'},
         'task-6': {id: 'task-6', content: 'abc6'},
-        'task-7': {id: 'task-6', content: 'abc7'},
-        'task-8': {id: 'task-6', content: 'abc8'},
+        'task-7': {id: 'task-7', content: 'abc7'},
+        'task-8': {id: 'task-8', content: 'abc8'},
     },
     columns: {
         'column-1': {
@@ -36,11 +36,16 @@ const initialData: any = {
         },
         'column-2': {
             id: 'column-2',
+            title: 'Tran dau',
+            taskIds: []
+        },
+        'column-3': {
+            id: 'column-3',
             title: 'Remove',
             taskIds: []
-        }
+        },
     },
-    columnOrder: ['column-1', 'column-2']
+    columnOrder: ['column-1', 'column-2', 'column-3']
 }
 export default function Bdg() {
     const [tasks] = useState(initialData.tasks)
@@ -103,28 +108,54 @@ export default function Bdg() {
             <div className="flex justify-center gap-4 mb-4">
                 {
                     [1, 2, 3, ].map((item) =>
-                        <Card className="max-w-xs">
-                            <CardHeader floated={false} className="h-auto">
-                                <img src="/img/heroes/Sphinx.png" alt="profile-picture" />
+                        <Card
+                            shadow={true}
+                            className="relative grid
+                items-end justify-center overflow-hidden text-center shadow-lg hover:shadow-pink-500/50"
+                        >
+                            <CardHeader
+                                color="transparent"
+                                className="absolute inset-0 m-0 h-full w-full rounded-none"
+                            >
+                                <img className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50" src="/img/heroes/Sphinx.png" alt="profile-picture" />
                             </CardHeader>
-                            <CardBody className="text-center">
-                                {/*<Typography variant="h4" color="blue-gray" className="mb-2">*/}
-                                {/*    SPINX*/}
-                                {/*</Typography>*/}
-                                <Typography color="blue" className="font-medium" textGradient>
+                            <CardBody className="bg-white bg-opacity-80
+                            opacity-0 hover:opacity-100
+                            relative py-14 px-6 md:px-12 shadow-light-indigo-500">
+                                <Typography
+                                    variant="h2"
+                                    // color="indigo"
+                                    className="mb-6 font-bold"
+                                >
+                                    SPINX
+                                </Typography>
+                                <Typography variant="h5" className="mb-4 font-bold underline decoration-wavy">
                                     +10% ATK
                                 </Typography>
                             </CardBody>
-                            {/*<CardFooter className="pt-0">*/}
-                            {/*    /!*<Button*!/*/}
-                            {/*    /!*    ripple={false}*!/*/}
-                            {/*    /!*    fullWidth={true}*!/*/}
-                            {/*    /!*    className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"*!/*/}
-                            {/*    /!*>*!/*/}
-                            {/*    /!*    Add to Cart*!/*/}
-                            {/*    /!*</Button>*!/*/}
-                            {/*</CardFooter>*/}
                         </Card>
+                        // <Card className="max-w-xs">
+                        //     <CardHeader floated={false} className="h-auto">
+                        //         <img src="/img/heroes/Sphinx.png" alt="profile-picture" />
+                        //     </CardHeader>
+                        //     <CardBody className="text-center">
+                        //         {/*<Typography variant="h4" color="indigo-gray" className="mb-2">*/}
+                        //         {/*    SPINX*/}
+                        //         {/*</Typography>*/}
+                        //         <Typography color="indigo" className="font-medium" textGradient>
+                        //             +10% ATK
+                        //         </Typography>
+                        //     </CardBody>
+                        //     {/*<CardFooter className="pt-0">*/}
+                        //     {/*    /!*<Button*!/*/}
+                        //     {/*    /!*    ripple={false}*!/*/}
+                        //     {/*    /!*    fullWidth={true}*!/*/}
+                        //     {/*    /!*    className="bg-indigo-gray-900/10 text-indigo-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"*!/*/}
+                        //     {/*    /!*>*!/*/}
+                        //     {/*    /!*    Add to Cart*!/*/}
+                        //     {/*    /!*</Button>*!/*/}
+                        //     {/*</CardFooter>*/}
+                        // </Card>
                     )
                 }
             </div>
