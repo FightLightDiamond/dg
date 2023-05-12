@@ -10,14 +10,14 @@ import {
 
 const initialData: any = {
     tasks: {
-        'task-1': {id: 'task-1', content: 'abc'},
-        'task-2': {id: 'task-2', content: 'abc2'},
-        'task-3': {id: 'task-3', content: 'abc3'},
-        'task-4': {id: 'task-4', content: 'abc4'},
-        'task-5': {id: 'task-5', content: 'abc5'},
-        'task-6': {id: 'task-6', content: 'abc6'},
-        'task-7': {id: 'task-7', content: 'abc7'},
-        'task-8': {id: 'task-8', content: 'abc8'},
+        'task-1': {id: 'task-1', content: 'abc', img: '/img/avatar/sprinx.png'},
+        'task-2': {id: 'task-2', content: 'abc2', img: '/img/avatar/Hell.png'},
+        'task-3': {id: 'task-3', content: 'abc3', img: '/img/avatar/Hera.png'},
+        'task-4': {id: 'task-4', content: 'abc4', img: '/img/avatar/amon.png'},
+        'task-5': {id: 'task-5', content: 'abc5', img: '/img/avatar/Chiron.png'},
+        'task-6': {id: 'task-6', content: 'abc6', img: '/img/avatar/Darklord.png'},
+        'task-7': {id: 'task-7', content: 'abc7', img: '/img/avatar/Fenrir.png'},
+        'task-8': {id: 'task-8', content: 'abc8', img: '/img/avatar/pandora.png'},
     },
     columns: {
         'column-1': {

@@ -19,7 +19,7 @@ const Task = ({task, index}: any) => {
                             <Avatar
                                 size="xxl"
                                 variant="rounded"
-                                src="/img/avatar/sprinx.png"
+                                src={task.img}
                                 alt="profile picture"
                                 className='shadow-lg hover:shadow-pink-500/100'
                             />
