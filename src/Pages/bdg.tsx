@@ -1,12 +1,18 @@
 import Column from "../Components/Column";
 import {DragDropContext} from "react-beautiful-dnd";
 import {useState} from "react";
-import {
+import {IconButton,
     Card,
     CardHeader,
     CardBody,
     Typography, Button, CardFooter, Avatar,
 } from "@material-tailwind/react";
+import {
+    CloudArrowUpIcon,
+    ArrowLongRightIcon,
+    ArrowPathIcon,
+    BookmarkIcon,
+} from "@heroicons/react/24/outline";
 
 const initialData: any = {
     tasks: {
@@ -148,9 +154,9 @@ export default function Bdg() {
                             >
                                 <img className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50" src="/img/heroes/Sphinx.png" alt="profile-picture" />
                             </CardHeader>
-                            <CardBody className="bg-white bg-opacity-80
+                            <CardBody className="bg-white bg-opacity-80 isolate relative
                             opacity-0 hover:opacity-100
-                            relative py-14 px-6 md:px-12 shadow-light-indigo-500">
+                            relative py-10 px-6 md:px-12 shadow-light-indigo-500">
                                 <Typography
                                     variant="h2"
                                     // color="indigo"
@@ -161,30 +167,26 @@ export default function Bdg() {
                                 <Typography variant="h5" className="mb-4 font-bold underline decoration-wavy">
                                     +10% ATK
                                 </Typography>
+
+                                <IconButton size='sm' color='red' className='absolute bottom-0 right-0 rotate- cursor-wait'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </IconButton>
+
+                                <IconButton size='sm' color='blue'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                    </svg>
+                                </IconButton>
+
+                                <IconButton size='sm' color='blue' className='cursor-n-resize'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </IconButton>
                             </CardBody>
                         </Card>
-                        // <Card className="max-w-xs">
-                        //     <CardHeader floated={false} className="h-auto">
-                        //         <img src="/img/heroes/Sphinx.png" alt="profile-picture" />
-                        //     </CardHeader>
-                        //     <CardBody className="text-center">
-                        //         {/*<Typography variant="h4" color="indigo-gray" className="mb-2">*/}
-                        //         {/*    SPINX*/}
-                        //         {/*</Typography>*/}
-                        //         <Typography color="indigo" className="font-medium" textGradient>
-                        //             +10% ATK
-                        //         </Typography>
-                        //     </CardBody>
-                        //     {/*<CardFooter className="pt-0">*/}
-                        //     {/*    /!*<Button*!/*/}
-                        //     {/*    /!*    ripple={false}*!/*/}
-                        //     {/*    /!*    fullWidth={true}*!/*/}
-                        //     {/*    /!*    className="bg-indigo-gray-900/10 text-indigo-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"*!/*/}
-                        //     {/*    /!*>*!/*/}
-                        //     {/*    /!*    Add to Cart*!/*/}
-                        //     {/*    /!*</Button>*!/*/}
-                        //     {/*</CardFooter>*/}
-                        // </Card>
                     )
                 }
             </div>

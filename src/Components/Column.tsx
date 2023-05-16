@@ -43,7 +43,7 @@ const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], is
                         </div>
                     )}
                 </Droppable>
-                {column.id === 'column-2' && <BottomList/>}
+                {column.id !== 'column-3' && <BottomList/>}
 
             </CardBody>
         </Card>
