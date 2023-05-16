@@ -22,7 +22,7 @@ const initialData: any = {
     columns: {
         'column-1': {
             id: 'column-1',
-            title: 'to do',
+            title: 'Pre',
             taskIds: [
                 'task-1',
                 'task-2',
@@ -36,7 +36,7 @@ const initialData: any = {
         },
         'column-2': {
             id: 'column-2',
-            title: 'Tran dau',
+            title: 'Ready',
             taskIds: []
         },
         'column-3': {
@@ -51,10 +51,14 @@ export default function Bdg() {
     const [tasks] = useState(initialData.tasks)
     const [columns, setColumns] = useState<any>(initialData.columns)
     const [columnOrder] = useState(initialData.columnOrder)
+    const [homeIndex, setHomeIndex] = useState<number| null>(null)
 
-    const onDragStart = () => {
+
+    const onDragStart = (home: any) => {
         document.body.style.color = 'orange';
         document.body.style.transition = 'background-color 0.2s ease';
+        const homeIndex = columnOrder.indexOf(home.source.droppableId);
+        setHomeIndex(homeIndex)
     }
 
     const onDragUpdate = (update: any) => {
@@ -70,10 +74,8 @@ export default function Bdg() {
      * @param result
      */
     const onDragEnd = (result: any) => {
-        document.body.style.color = 'inherit';
-        document.body.style.backgroundColor = 'inherit';
-
-        const {destination, source, draggableId} = result;
+        setHomeIndex(null)
+        const { destination, source, draggableId } = result;
 
         if (!destination) {
             return;
@@ -86,21 +88,48 @@ export default function Bdg() {
             return;
         }
 
-        const column = columns[source.droppableId];
-        const newTaskIds = Array.from(column.taskIds);
-        newTaskIds.splice(source.index, 1);
-        newTaskIds.splice(destination.index, 0, draggableId);
+        const home = columns[source.droppableId];
+        const foreign = columns[destination.droppableId];
 
-        const newColumn = {
-            ...column,
-            taskIds: newTaskIds,
+        if (home === foreign) {
+            const newTaskIds = Array.from(home.taskIds);
+            newTaskIds.splice(source.index, 1);
+            newTaskIds.splice(destination.index, 0, draggableId);
+
+            const newColumn = {
+                ...home,
+                taskIds: newTaskIds,
+            };
+
+            setColumns({
+                ...columns,
+                [newColumn.id]: newColumn,
+            })
+
+            return;
+        }
+
+        // Moving from one list to another
+        const homeTaskIds = Array.from(home.taskIds);
+        homeTaskIds.splice(source.index, 1);
+        const newHome = {
+            ...home,
+            taskIds: homeTaskIds,
+        };
+
+        const foreignTaskIds = Array.from(foreign.taskIds);
+        foreignTaskIds.splice(destination.index, 0, draggableId);
+        const newFinish = {
+            ...foreign,
+            taskIds: foreignTaskIds,
         };
 
         setColumns({
             ...columns,
-            [newColumn.id]: newColumn,
+            [newHome.id]: newHome,
+            [newFinish.id]: newFinish,
         })
-    }
+    };
 
 
     return <>

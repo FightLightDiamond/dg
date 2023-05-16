@@ -3,6 +3,18 @@ import Task from './Task';
 import {Droppable} from "react-beautiful-dnd";
 import {Card, CardBody, Typography} from "@material-tailwind/react";
 
+const BottomList = () =>   {
+
+    let content = [];
+    for (let i = 1; i < 10; i++) {
+        const item = <div className='border-t border-dotted shardow shadow-amber-500'>{i}</div>;
+        content.push(item);
+    }
+
+    return <div className={'grid grid-cols-9 text-center'}>
+        {content}
+    </div>
+}
 
 const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], isDropDisabled?: boolean, index?: number}) => {
     return (
@@ -16,7 +28,7 @@ const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], is
                     direction="horizontal"
                 >
                     {(provided, snapshot) => (
-                        <div className={'flex flex-row justify-between'}
+                        <div className={'grid grid-cols-9 mb-1'}
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                             data-draggingover={snapshot.isDraggingOver}
@@ -31,6 +43,8 @@ const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], is
                         </div>
                     )}
                 </Droppable>
+                {column.id === 'column-2' && <BottomList/>}
+
             </CardBody>
         </Card>
     )
