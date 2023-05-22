@@ -5,14 +5,8 @@ import {IconButton,
     Card,
     CardHeader,
     CardBody,
-    Typography, Button, CardFooter, Avatar,
+    Typography
 } from "@material-tailwind/react";
-import {
-    CloudArrowUpIcon,
-    ArrowLongRightIcon,
-    ArrowPathIcon,
-    BookmarkIcon,
-} from "@heroicons/react/24/outline";
 
 const initialData: any = {
     tasks: {
@@ -24,6 +18,7 @@ const initialData: any = {
         'task-6': {id: 'task-6', content: 'abc6', img: '/img/avatar/Darklord.png'},
         'task-7': {id: 'task-7', content: 'abc7', img: '/img/avatar/Fenrir.png'},
         'task-8': {id: 'task-8', content: 'abc8', img: '/img/avatar/pandora.png'},
+        'task-9': {id: 'task-9', content: 'abc9', img: ''},
     },
     columns: {
         'column-1': {
@@ -38,6 +33,7 @@ const initialData: any = {
                 'task-6',
                 'task-7',
                 'task-8',
+                'task-9',
             ]
         },
         'column-2': {
@@ -51,7 +47,7 @@ const initialData: any = {
             taskIds: []
         },
     },
-    columnOrder: ['column-1', 'column-2', 'column-3']
+    columnOrder: ['column-1']
 }
 export default function Bdg() {
     const [tasks] = useState(initialData.tasks)
@@ -61,18 +57,18 @@ export default function Bdg() {
 
 
     const onDragStart = (home: any) => {
-        document.body.style.color = 'orange';
-        document.body.style.transition = 'background-color 0.2s ease';
-        const homeIndex = columnOrder.indexOf(home.source.droppableId);
-        setHomeIndex(homeIndex)
+        // document.body.style.color = 'orange';
+        // document.body.style.transition = 'background-color 0.2s ease';
+        // const homeIndex = columnOrder.indexOf(home.source.droppableId);
+        // setHomeIndex(homeIndex)
     }
 
     const onDragUpdate = (update: any) => {
-        const {destination} = update;
-        const opacity = destination
-            ? destination.index / Object.keys(tasks).length
-            : 0;
-        document.body.style.backgroundColor = `rgba( 153, 141, 217, ${opacity})`;
+        // const {destination} = update;
+        // const opacity = destination
+        //     ? destination.index / Object.keys(tasks).length
+        //     : 0;
+        // document.body.style.backgroundColor = `rgba( 153, 141, 217, ${opacity})`;
     };
 
     /**
@@ -80,6 +76,7 @@ export default function Bdg() {
      * @param result
      */
     const onDragEnd = (result: any) => {
+        console.log({result});
         setHomeIndex(null)
         const { destination, source, draggableId } = result;
 
@@ -144,6 +141,7 @@ export default function Bdg() {
                 {
                     [1, 2, 3, ].map((item) =>
                         <Card
+                            key={item}
                             shadow={true}
                             className="relative grid
                 items-end justify-center overflow-hidden text-center shadow-lg hover:shadow-pink-500/50"

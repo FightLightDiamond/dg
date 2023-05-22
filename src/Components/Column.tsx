@@ -4,10 +4,10 @@ import {Droppable} from "react-beautiful-dnd";
 import {Card, CardBody, Typography} from "@material-tailwind/react";
 
 const BottomList = () =>   {
-
     let content = [];
+
     for (let i = 1; i < 10; i++) {
-        const item = <div className='border-t border-dotted shardow shadow-amber-500'>{i}</div>;
+        const item = <div key={i} className='border-t border-dotted shardow shadow-amber-500'>{i}</div>;
         content.push(item);
     }
 
@@ -44,7 +44,6 @@ const Column = ({column, tasks, isDropDisabled}:  {column: any, tasks: any[], is
                     )}
                 </Droppable>
                 {column.id !== 'column-3' && <BottomList/>}
-
             </CardBody>
         </Card>
     )
