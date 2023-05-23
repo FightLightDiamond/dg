@@ -24,8 +24,8 @@ const initialData: any = {
                 {id: 4, item: 'task-4'},
                 {id: 5, item: 'task-5'},
                 {id: 6, item: 'task-6'},
-                {id: 7, item: 'task-1'},
-                {id: 8, item: 'task-1'},
+                {id: 7, item: 'task-7'},
+                {id: 8, item: 'task-8'},
             ]
         },
         'column-2': {
@@ -38,8 +38,8 @@ const initialData: any = {
                 {id: 41, item: 'task-4'},
                 {id: 51, item: 'task-5'},
                 {id: 61, item: 'task-6'},
-                {id: 71, item: 'task-1'},
-                {id: 81, item: 'task-1'},
+                {id: 71, item: 'task-7'},
+                {id: 81, item: 'task-8'},
             ]
         },
         'column-3': {
@@ -57,7 +57,7 @@ const initialData: any = {
             ]
         },
     },
-    columnOrder: ['column-1', 'column-2', 'column-3']
+    columnOrder: ['column-1', 'column-2']
 }
 
 interface ITaskColumn {
@@ -89,12 +89,16 @@ export default function Bdg3() {
         // setHomeIndex(homeIndex)
     };
 
+    const onDragUpdate = (update: any) => {
+        console.log({update})
+    };
+
     /**
      * Update data
      * @param result
      */
     const onDragEnd = (result: any) => {
-        setHomeIndex(null)
+        // setHomeIndex(null)
         const {destination, source, draggableId, type} = result;
         console.log({result})
 
@@ -108,68 +112,68 @@ export default function Bdg3() {
         ) {
             return;
         }
-        /**
-         * Di chuyển cả column
-         */
-        if (type === 'column') {
-            const newColumnOrder = Array.from(columnOrder);
-            newColumnOrder.splice(source.index, 1);
-            newColumnOrder.splice(destination.index, 0, draggableId);
-            setColumnOrder(newColumnOrder)
-            return;
-        }
+        // /**
+        //  * Di chuyển cả column
+        //  */
+        // if (type === 'column') {
+        //     const newColumnOrder = Array.from(columnOrder);
+        //     newColumnOrder.splice(source.index, 1);
+        //     newColumnOrder.splice(destination.index, 0, draggableId);
+        //     setColumnOrder(newColumnOrder)
+        //     return;
+        // }
 
-        const home = columns[source.droppableId];
-        const foreign = columns[destination.droppableId];
-
-        if (source.droppableId === destination.droppableId) {
-            const newTaskIds = Array.from(home.taskIds);
-            newTaskIds.splice(source.index, 1);
-            newTaskIds.splice(destination.index, 0, {...home.taskIds[source.index], id: draggableId});
-
-            const newColumn = {
-                ...home,
-                taskIds: newTaskIds,
-            };
-
-            console.log({
-                ...columns,
-                [newColumn.id]: newColumn,
-            })
-
-            setColumns({
-                ...columns,
-                [newColumn.id]: newColumn,
-            })
-
-            return;
-        }
-
-        // Moving from one list to another
-        const homeTaskIds = Array.from(home.taskIds);
-        // homeTaskIds.splice(source.index, 1);
-
-        homeTaskIds[source.index] = foreign.taskIds[destination.index]
-
-        const newHome = {
-            ...home,
-            taskIds: homeTaskIds,
-        };
-
-        const foreignTaskIds = Array.from(foreign.taskIds)
-        // foreignTaskIds.splice(destination.index, 0, draggableId);
-        foreignTaskIds[destination.index] = home.taskIds[source.index]
-
-        const newFinish = {
-            ...foreign,
-            taskIds: foreignTaskIds,
-        };
-
-        console.log({
-            ...columns,
-            [newHome.id]: newHome,
-            [newFinish.id]: newFinish,
-        })
+        // const home = columns[source.droppableId];
+        // const foreign = columns[destination.droppableId];
+        //
+        // if (source.droppableId === destination.droppableId) {
+        //     const newTaskIds = Array.from(home.taskIds);
+        //     newTaskIds.splice(source.index, 1);
+        //     newTaskIds.splice(destination.index, 0, {...home.taskIds[source.index], id: draggableId});
+        //
+        //     const newColumn = {
+        //         ...home,
+        //         taskIds: newTaskIds,
+        //     };
+        //
+        //     console.log({
+        //         ...columns,
+        //         [newColumn.id]: newColumn,
+        //     })
+        //
+        //     setColumns({
+        //         ...columns,
+        //         [newColumn.id]: newColumn,
+        //     })
+        //
+        //     return;
+        // }
+        //
+        // // Moving from one list to another
+        // const homeTaskIds = Array.from(home.taskIds);
+        // // homeTaskIds.splice(source.index, 1);
+        //
+        // homeTaskIds[source.index] = foreign.taskIds[destination.index]
+        //
+        // const newHome = {
+        //     ...home,
+        //     taskIds: homeTaskIds,
+        // };
+        //
+        // const foreignTaskIds = Array.from(foreign.taskIds)
+        // // foreignTaskIds.splice(destination.index, 0, draggableId);
+        // foreignTaskIds[destination.index] = home.taskIds[source.index]
+        //
+        // const newFinish = {
+        //     ...foreign,
+        //     taskIds: foreignTaskIds,
+        // };
+        //
+        // console.log({
+        //     ...columns,
+        //     [newHome.id]: newHome,
+        //     [newFinish.id]: newFinish,
+        // })
 
         // setColumns({
         //     ...columns,
@@ -181,33 +185,23 @@ export default function Bdg3() {
     return <>
         <DragDropContext
             onDragStart={onDragStart}
+            onDragUpdate={onDragUpdate}
             onDragEnd={onDragEnd}
         >
-            <Droppable
-                droppableId="all-columns"
-                direction="horizontal"
-                type="column"
-            >
-                {(provided) => (
-                    <div  className="grid grid-cols-1"
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                    >
-                        {
-                            columnOrder.map((columnId: string, index: number) => {
-                                const column = columns[columnId];
-                                return <InnerList
-                                    key={column.id}
-                                    column={column}
-                                    taskMap={tasks}
-                                    index={index}
-                                />
-                            })
-                        }
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
+            <div className="grid grid-cols-1">
+                {
+                    columnOrder.map((columnId: string, index: number) => {
+                        const column = columns[columnId];
+                        return <InnerList
+                            key={column.id}
+                            column={column}
+                            taskMap={tasks}
+                            index={index}
+                        />
+                    })
+                }
+            </div>
+
         </DragDropContext>
     </>
 }

@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from "@material-tailwind/react";
+import {ThemeProvider} from "@material-tailwind/react";
+import {Provider} from "react-redux";
+import store from "./App/Http/Store";
+
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.Fragment>
-      <ThemeProvider>
-      <App />
-      </ThemeProvider>
-  </React.Fragment>
+    <React.Fragment>
+        <Provider store={store}>
+            <ThemeProvider>
+                <App/>
+            </ThemeProvider>
+        </Provider>
+    </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function

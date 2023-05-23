@@ -1,30 +1,43 @@
-import {Draggable} from 'react-beautiful-dnd';
-
+import {Draggable, Droppable} from 'react-beautiful-dnd';
 
 const Task3 = ({task, index}: any) => {
-    // const isDragDisabled = task.id === 'task-1';
-
-    return <div className={'p-1 border-2 bg-gray-300'}>
-        <Draggable
-            draggableId={task.rowId + ''}
-            index={index}
-            // isDragDisabled={isDragDisabled}
+    return <div className={'p-4 border-2 bg-gray-300'}>
+        <Droppable
+            droppableId={task.id}
+            // direction="horizontal"
         >
             {(provided, snapshot) => (
-                // snapshot - status
-                <div className={'aspect-square border-2 border-amber-200'}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
+                <div
                     ref={provided.innerRef}
-                    data-dragging={snapshot.isDragging}
-                    aria-roledescription="Press space bar to lift the task"
+                    {...provided.droppableProps}
+                    data-draggingover={snapshot.isDraggingOver}
                 >
-                    <div {...provided.dragHandleProps}>
-                        {task.content}
+                    <Draggable
+                        draggableId={task.rowId + ''}
+                        index={index}
+                        // isDragDisabled={true}
+                    >
+                        {(provided, snapshot) => (
+                            // snapshot - status
+                            <div className={'aspect-square border-2 border-amber-200'}
+                                 {...provided.draggableProps}
+                                 {...provided.dragHandleProps}
+                                 ref={provided.innerRef}
+                                 data-dragging={snapshot.isDragging}
+                                 aria-roledescription="Press space bar to lift the task"
+                            >
+                                <div {...provided.dragHandleProps}>
+                                    {task.content} {task.rowId} {index}
+                                </div>
+                            </div>
+                        )}
+                    </Draggable>
+                    <div style={{ visibility: 'hidden', height: 0 }}>
+                        {provided.placeholder}
                     </div>
                 </div>
             )}
-        </Draggable>
+        </Droppable>
     </div>
 
 }

@@ -47,7 +47,7 @@ const initialData: any = {
             taskIds: []
         },
     },
-    columnOrder: ['column-1']
+    columnOrder: ['column-1', 'column-2']
 }
 export default function Bdg() {
     const [tasks] = useState(initialData.tasks)
