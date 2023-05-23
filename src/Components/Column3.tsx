@@ -1,27 +1,7 @@
 import {memo} from 'react';
-import styled from 'styled-components';
 import {Droppable, Draggable} from "react-beautiful-dnd";
 import Task3 from "./Task3";
 
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  background-color: white;
-  border-radius: 2px;
-  width: 220px;
-
-  display: flex;
-  flex-direction: column;
-`
-const Title = styled.h3`
-  padding: 8px;
-`
-const TaskList = styled.div`
-  padding: 8px;
-  transition: background-color 0.2s ease;
-  flex-grow: 1;
-  min-height: 100px;
-`
 
 const InnerList = ({tasks}: any & any[]) => {
     return tasks.map((task: any, index: number) => (
@@ -42,30 +22,34 @@ const Column3 = ({column, tasks, isDropDisabled, index}: {
     index: number
 }) => {
     return (
-        <Draggable draggableId={column.id} index={index}>
+        <Draggable draggableId={column.id}
+                   index={index}
+        >
             {(provided) => (
-                <Container
+                <div
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                 >
-                    <Title {...provided.dragHandleProps}>{column.title}</Title>
+                    <div {...provided.dragHandleProps}>{column.title}1</div>
                     {/*//Droppable //for // Draggable*/}
                     <Droppable
                         droppableId={column.id}
                         type="task"
+                        direction="horizontal"
                     >
                         {(provided, snapshot) => (
-                            <TaskList
+                            <div
+                                className="grid grid-cols-8 gap-1 mb-1"
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                                 data-draggingover={snapshot.isDraggingOver}
                             >
                                 <OnlyEvens tasks={tasks}/>
                                 {provided.placeholder}
-                            </TaskList>
+                            </div>
                         )}
                     </Droppable>
-                </Container>
+                </div>
             )}
         </Draggable>
     )

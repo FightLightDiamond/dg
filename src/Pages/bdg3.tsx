@@ -10,6 +10,9 @@ const initialData: any = {
         'task-3': {id: 'task-3', content: 'abc3'},
         'task-4': {id: 'task-4', content: 'abc4'},
         'task-5': {id: 'task-5', content: 'abc5'},
+        'task-6': {id: 'task-6', content: 'abc6'},
+        'task-7': {id: 'task-7', content: 'abc7'},
+        'task-8': {id: 'task-8', content: 'abc8'},
     },
     columns: {
         'column-1': {
@@ -20,20 +23,16 @@ const initialData: any = {
         'column-2': {
             id: 'column-2',
             title: 'In progress',
-            taskIds: []
+            taskIds: [ 'task-5',  'task-6']
         },
         'column-3': {
             id: 'column-3',
             title: 'Done',
-            taskIds: []
+            taskIds: ['task-7',  'task-8']
         },
     },
     columnOrder: ['column-1', 'column-2', 'column-3']
 }
-
-const Container = styled.div`
-  display: flex;
-`;
 
 const InnerList = ({column, taskMap, index}: any) => {
     const tasks = column.taskIds.map((taskId: number) => taskMap[taskId]);
@@ -136,7 +135,7 @@ export default function Bdg3() {
                 type="column"
             >
                 {(provided) => (
-                    <Container
+                    <div  className="grid grid-cols-1"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
@@ -152,7 +151,7 @@ export default function Bdg3() {
                             })
                         }
                         {provided.placeholder}
-                    </Container>
+                    </div>
                 )}
             </Droppable>
         </DragDropContext>
