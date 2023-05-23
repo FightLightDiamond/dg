@@ -5,7 +5,7 @@ import Task3 from "./Task3";
 
 const InnerList = ({tasks}: any & any[]) => {
     return tasks.map((task: any, index: number) => (
-        <Task3 key={task.id} task={task} index={index}/>
+        <Task3 key={task.rowId} task={task} index={index}/>
     ));
 }
 
@@ -45,7 +45,6 @@ const Column3 = ({column, tasks, isDropDisabled, index}: {
                                 data-draggingover={snapshot.isDraggingOver}
                             >
                                 <OnlyEvens tasks={tasks}/>
-                                {provided.placeholder}
                             </div>
                         )}
                     </Droppable>
