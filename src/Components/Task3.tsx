@@ -4,7 +4,7 @@ import {Draggable} from 'react-beautiful-dnd';
 const Task3 = ({task, index}: any) => {
     // const isDragDisabled = task.id === 'task-1';
 
-    return <div>
+    return <div className={'p-1 border-2 bg-gray-300'}>
         <Draggable
             draggableId={task.rowId + ''}
             index={index}
