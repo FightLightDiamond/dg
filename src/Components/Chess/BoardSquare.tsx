@@ -38,6 +38,7 @@ function BoardSquare({ x, y, children }: {x: number, y: number, children: any}) 
     return (
         <div
             ref={drop}
+            role={'Dustbin'}
             style={{
                 position: 'relative',
                 width: '100%',

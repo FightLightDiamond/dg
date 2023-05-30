@@ -3,7 +3,7 @@ import {ItemsConstant} from "../../constants/items.constant";
 import {memo} from "react";
 
 function Knight({boardId}: {boardId: number}) {
-    const [{isDragging}, drag] = useDrag(() => ({
+    const [{isDragging}, drag, dragPreview] = useDrag(() => ({
         type: ItemsConstant.KNIGHT,
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
@@ -17,19 +17,24 @@ function Knight({boardId}: {boardId: number}) {
 
     return (
         <>
-            <div
-                className={'aspect-square'}
-                ref={drag}
-                style={{
-                    opacity: isDragging ? 0.5 : 1,
-                    fontSize: 40,
-                    fontWeight: 'bold',
-                    cursor: 'move',
-                    background: "gold"
-                }}
-            >
-                <img src="/img/avatar/Hera.png" alt=""/>
-            </div>
+            {
+                isDragging ? (
+                    <div ref={dragPreview} />
+                ) : <div
+                    className={'aspect-square'}
+                    ref={drag}
+                    role="Handle"
+                    style={{
+                        opacity: isDragging ? 0.5 : 1,
+                        fontSize: 40,
+                        fontWeight: 'bold',
+                        cursor: 'move',
+                        background: "gold"
+                    }}
+                >
+                    <img src="/img/avatar/Hera.png" alt=""/>
+                </div>
+            }
         </>
 
     )

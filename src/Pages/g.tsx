@@ -8,10 +8,11 @@ export default function G() {
     const dispatch = useDispatch()
 
     useEffectOnce(() => {
-        dispatch({type: move.type, payload: {x: 1, y: 2}})
+        dispatch({type: move.type, payload: {x: 0, y: 0}})
     });
 
     return <>
         <Board/>,
     </>
 }
+
