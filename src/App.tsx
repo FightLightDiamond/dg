@@ -6,6 +6,7 @@ import Bdg from "./Pages/bdg";
 import Bdg2 from "./Pages/bdg2";
 import Bdg3 from "./Pages/bdg3";
 import Bdg4 from "./Pages/bdg4";
+import Map from "./Pages/map";
 import {
   Navbar,
   Typography,
@@ -90,6 +91,7 @@ function App() {
             <Route path="/bdg2" element={<Bdg2/>}/>
             <Route path="/bdg3" element={<Bdg3/>}/>
             <Route path="/bdg4" element={<Bdg4/>}/>
+            <Route path="/map" element={<Map/>}/>
           </Routes>
         </BrowserRouter>
       </div>

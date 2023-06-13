@@ -1,17 +1,21 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-const KING = 0
-const QUEEN = 1
-const ROOK = 2
-const BISHOP = 3
-const KNIGHT = 4
-const PAWN = 5
-const WHITE = 0
-const BLACK = 1
+export const KING = 0
+export const QUEEN = 1
+export const ROOK = 2
+export const BISHOP = 3
+export const KNIGHT = 4
+export const PAWN = 5
+export const WHITE = 0
+export const BLACK = 1
 
-const pieces = ['King', 'Queen', 'Rook', 'Bishop', 'Knight', 'Pawn']
-const sides = ['white', 'black']
+export const pieces = ['King', 'Queen', 'Rook', 'Bishop', 'Knight', 'Pawn']
+export const sides = ['white', 'black']
 
-const map = [
+export interface IPiece {
+	piece?: number, side?: number, x?: number, y?: number, is_alive?: number
+}
+
+const board = [
 	{piece: ROOK, side: 0, x: 0, y: 0, is_alive: 1},
 	{piece: KNIGHT, side: 0, x: 1, y: 0, is_alive: 1},
 	{piece: BISHOP, side: 0, x: 2, y: 0, is_alive: 1},
@@ -77,12 +81,14 @@ interface IState {
 		{id: 13, itemId: null},
 		{id: 14, itemId: null},
 		{id: 15, itemId: null},
-	]
+	],
+	board: IPiece[]
 }
 
 const initialState: IState = {
 	x: 0,
 	y: 0,
+	board: board
 }
 
 export const chessSlice = createSlice({

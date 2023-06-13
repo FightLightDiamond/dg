@@ -1,19 +1,28 @@
-import React, {memo} from 'react'
-import Knight from './Pieces/Knight'
+import React from "react";
+import Board from "../Components/Chess/Board";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffectOnce} from "../App/Hooks/useEffectOnce";
+import {IPiece, KNIGHT, move} from "../App/Http/Store/Reducers/chess.slice";
+import {RootState} from "../App/Http/Store";
 import {DndProvider} from "react-dnd";
-import {HTML5Backend} from 'react-dnd-html5-backend'
-import BoardSquare from "./BoardSquare";
-import {useSelector} from "react-redux";
-import {RootState} from "../../App/Http/Store";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import Knight from "../Components/Chess/Pieces/Knight";
+import BoardSquare from "../Components/Chess/BoardSquare";
 
-function Board() {
+export default function Map() {
+    const dispatch = useDispatch()
     const chess  = useSelector((state: RootState) => state.chess);
-    function renderSquare(i: number) {
+    console.log(chess)
+    useEffectOnce(() => {
+        // dispatch({type: move.type, payload: {x: 0, y: 0}})
+    });
+
+    function renderSquare(i: number, item: IPiece) {
         const x = i % 8
         const y = Math.floor(i / 8)
 
         function renderPiece(x: number, y: number) {
-            if (x === chess.x && y === chess.y) {
+            if (item?.piece === KNIGHT) {
                 return <Knight boardId={i} />
             }
         }
@@ -27,10 +36,11 @@ function Board() {
         )
     }
 
-    const squares = []
-    for (let i = 0; i < 64; i++) {
-        squares.push(renderSquare(i))
-    }
+    const squares: any[] = []
+
+    chess.board.forEach((item, i) => {
+        squares.push(renderSquare(i, item))
+    })
 
     return (
         <div className='container h-screen w-auto aspect-square'>
@@ -50,4 +60,3 @@ function Board() {
     )
 }
 
-export default memo(Board)

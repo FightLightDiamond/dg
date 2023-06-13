@@ -1,12 +1,11 @@
 import {useDrag} from "react-dnd";
-import {ItemsConstant} from "../../constants/items.constant";
 import {memo} from "react";
 
-function Knight({boardId}: {boardId: number}) {
+function Piece({boardId, type}: {boardId: number, type: number,}) {
     const [{isDragging}, drag, dragPreview] = useDrag(() => ({
-        type: ItemsConstant.KNIGHT,
+        type: type + '',
         collect: monitor => ({
-            isDragging: !!monitor.isDragging(),
+            isDragging: monitor.isDragging(),
         }),
         item: {boardId},
         canDrag: () => true,
@@ -23,7 +22,6 @@ function Knight({boardId}: {boardId: number}) {
                 ) : <div
                     className={'aspect-square'}
                     ref={drag}
-                    role="Handle"
                     style={{
                         opacity: isDragging ? 0.5 : 1,
                         fontSize: 40,
@@ -40,4 +38,4 @@ function Knight({boardId}: {boardId: number}) {
     )
 }
 
-export default memo(Knight)
+export default memo(Piece)
